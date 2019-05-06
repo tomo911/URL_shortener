@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: URL_shortener
+Implementation-Version: 1.0
+Built-By: etomcup
+Implementation-Vendor-Id: com.etomcup
+Build-Jdk: 1.8.0_212
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/URL_shortener
+Created-By: Maven Integration for Eclipse
+

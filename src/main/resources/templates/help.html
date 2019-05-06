@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Help</title>
+</head>
+<body>
+	<h1>Instructions to use URL shortener service:</h1>
+	<h2>1. Account creation</h2>
+		<p>In order to work with Url shortener service you need to create
+			an account by sending POST request with following structure:
+			<table>
+			  <tr>
+			    <td>HTTP method:</td>
+			    <td> Post</td>
+			  </tr>
+			  <tr>
+			    <td>Request type:</td>
+			    <td> application/json</td>
+			  </tr>
+			  <tr>
+			    <td>URI:</td>
+			    <td> /account</td>
+			  </tr>
+			  <tr>
+			    <td>Request Body:</td>
+			    <td> JSON file with provided String value for "AccountId" key</td>
+			  </tr>
+			</table>
+		</p>
+		<p>Account will be created if account with same AccountId does not exist. Response will have the following format:
+			<table>
+			  <tr>
+			    <td>Response type:</td>
+			    <td> application/json</td>
+			  </tr>
+			  <tr>
+			    <td>JSON content:</td>
+			    <td> "succes": (boolean)true|false, "description": (String)More info about response status, "password": password assigned to created account and it is sent only in case of successful account creation</td>
+			  </tr>
+			</table>
+		</p>
+	
+	<h2>2. URL registration</h2>
+		<p>Once account is created you can register URL which you want to shorten. Request should have the following structure:
+			<table>
+			  <tr>
+			    <td>HTTP method:</td>
+			    <td> Post</td>
+			  </tr>
+			  <tr>
+			    <td>Request type:</td>
+			    <td> application/json</td>
+			  </tr>
+			  <tr>
+			    <td>URI:</td>
+			    <td> /register</td>
+			  </tr>
+			  <tr>
+			    <td>Request Headers:</td>
+			    <td> Basic authorization needs to be used with previously created AccountId (as username) and password</td>
+			  </tr>
+			  <tr>
+			    <td>Request Body:</td>
+			    <td> JSON file with provided String value for "url" key and optionally "redirectType" with value 301 or 302 (302 will be assigned if not set)</td>
+			  </tr>
+			</table>
+		</p>
+		<p>In case of a valid registration request new URL will be registered and response will have the following format:
+			<table>
+			  <tr>
+			    <td>Response type:</td>
+			    <td> application/json</td>
+			  </tr>
+			  <tr>
+			    <td>JSON content:</td>
+			    <td> "shortUrl": (String) created URL</td>
+			  </tr>
+			</table>
+		</p>
+		<p>
+			<b>NOTE:</b> Newly created URL can be accessed <b>only by</b> account which created it. So, <b>when using new URL basic authorization needs to be used</b> with creators AccountId (as username) and password.
+		</p>
+
+	<h2>3. Statistics retrieval</h2>
+		<p>Every account can get <b>its own</b> statistics regarding visited sites through this service. Request should have the following structure:
+			<table>
+			  <tr>
+			    <td>HTTP method:</td>
+			    <td> Get</td>
+			  </tr>
+			  <tr>
+			    <td>URI:</td>
+			    <td> /statistic/{AccountId}</td>
+			  </tr>
+			  <tr>
+			    <td>Request Headers:</td>
+			    <td> Basic authorization needs to be used with AccountId (as username) and password</td>
+			  </tr>
+			</table>
+		</p>
+		<p>In case of a valid request response will have the following format:
+			<table>
+			  <tr>
+			    <td>Response type:</td>
+			    <td> application/json</td>
+			  </tr>
+			  <tr>
+			    <td>JSON content:</td>
+			    <td> "key":"value" map where keys will be all registered (long) URLs, and values will correspond to how many times it was reached through this service.</td>
+			  </tr>
+			</table>
+		</p>
+		<p>
+
+</body>
+</html>
